@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore personagens do universo Rick and Morty com dados carregados diretamente da API pública.">
+  <meta name="theme-color" content="#071916">
+  <title>Portal C-137 | Explorador Rick and Morty</title>
+  <link rel="preconnect" href="https://rickandmortyapi.com">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Portal C-137 - início">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-copy">
+          <strong>PORTAL <span>C-137</span></strong>
+          <small>ARQUIVO INTERDIMENSIONAL</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a class="nav-link active" href="#inicio">Início</a>
+        <a class="nav-link" href="#personagens">Personagens</a>
+        <a class="nav-link" href="#sobre">Sobre o projeto</a>
+      </nav>
+
+      <a class="header-api-link" href="https://rickandmortyapi.com/documentation" target="_blank" rel="noreferrer">
+        API oficial <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow"><span class="pulse-dot"></span> ACESSO AUTORIZADO <span class="eyebrow-divider">/</span> DIMENSÃO C-137</p>
+          <h1 id="hero-title">O multiverso<br>está <span>ao seu alcance.</span></h1>
+          <p class="hero-description">Viaje por realidades improváveis e conheça os habitantes mais curiosos do universo de Rick and Morty.</p>
+          <a class="primary-button" href="#personagens">Explorar personagens <span aria-hidden="true">↓</span></a>
+          <div class="hero-footnote"><span class="footnote-line"></span> DADOS CONSULTADOS DIRETAMENTE NA API</div>
+        </div>
+
+        <div class="hero-art" aria-label="Ilustração decorativa de um portal interdimensional">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="portal-ring">
+            <div class="portal-core"><span class="portal-star">✳</span><span class="portal-label">C-137</span></div>
+          </div>
+          <div class="floating-tag tag-top"><span class="tag-indicator"></span> MULTIVERSO ONLINE</div>
+          <div class="floating-tag tag-bottom"><span class="tag-icon">⌁</span> DESTINO: DESCONHECIDO</div>
+          <span class="art-coordinate coordinate-one">40° 42' N</span>
+          <span class="art-coordinate coordinate-two">DIM. 137</span>
+        </div>
+
+        <div class="hero-bottom-line">
+          <span>01 — CENTRAL DE EXPLORAÇÃO</span>
+          <span class="hero-bottom-center">UMA JORNADA ENTRE DIMENSÕES</span>
+          <span>SCROLL PARA EXPLORAR <span aria-hidden="true">↓</span></span>
+        </div>
+      </section>
+
+      <section class="explorer-section section-wrap" id="personagens" aria-labelledby="explorer-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">BANCO DE DADOS INTERDIMENSIONAL <span>///</span> 01</p>
+            <h2 id="explorer-title">Encontre seu <span>personagem.</span></h2>
+            <p class="section-description">Pesquise, filtre e descubra quem está habitando cada canto do multiverso.</p>
+          </div>
+          <div class="live-status"><span class="pulse-dot"></span> CONEXÃO COM A API ATIVA</div>
+        </div>
+
+        <div class="filter-panel">
+          <form id="filter-form" class="filter-form">
+            <label class="filter-field search-field">
+              <span class="field-label">NOME DO PERSONAGEM</span>
+              <span class="input-wrap"><span class="input-icon" aria-hidden="true">⌕</span><input id="name-input" name="name" type="search" placeholder="Ex.: Rick, Morty, Summer..." autocomplete="off"></span>
+            </label>
+            <label class="filter-field">
+              <span class="field-label">STATUS</span>
+              <select id="status-filter" name="status">
+                <option value="">Todos os status</option>
+                <option value="alive">Vivo</option>
+                <option value="dead">Morto</option>
+                <option value="unknown">Desconhecido</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              <span class="field-label">ESPÉCIE</span>
+              <input id="species-input" name="species" type="text" placeholder="Ex.: Human, Alien..." autocomplete="off">
+            </label>
+            <div class="filter-actions">
+              <button class="search-button" type="submit">Buscar <span aria-hidden="true">↗</span></button>
+              <button class="clear-button" id="clear-filters" type="button" aria-label="Limpar filtros" title="Limpar filtros">↺</button>
+            </div>
+          </form>
+          <div class="filter-hint"><span aria-hidden="true">ⓘ</span> Os filtros são aplicados diretamente na consulta à API.</div>
+        </div>
+
+        <div class="results-toolbar">
+          <div class="results-count"><span class="count-indicator"></span><strong id="results-count">Carregando personagens...</strong></div>
+          <div class="results-meta"><span>EXIBIÇÃO</span><strong>20 POR PÁGINA</strong><span class="meta-divider">/</span><span>FONTE</span><strong>RICK AND MORTY API</strong></div>
+        </div>
+
+        <div id="character-grid" class="character-grid" aria-live="polite" aria-busy="true">
+          <!-- Os cards são criados dinamicamente pelo JavaScript com os dados da API. -->
+        </div>
+
+        <div id="feedback-area" class="feedback-area" role="status" aria-live="polite"></div>
+
+        <div class="pagination-bar">
+          <button id="previous-page" class="page-button" type="button" disabled><span aria-hidden="true">←</span> Anterior</button>
+          <p id="page-indicator" class="page-indicator">Página <strong>1</strong> de <strong>—</strong></p>
+          <button id="next-page" class="page-button next" type="button" disabled>Próxima <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+
+      <section class="about-section" id="sobre" aria-labelledby="about-title">
+        <div class="section-wrap about-inner">
+          <div class="about-heading">
+            <p class="section-kicker">POR TRÁS DO PORTAL <span>///</span> 02</p>
+            <h2 id="about-title">Tecnologia que conecta <span>dimensões.</span></h2>
+            <p>Este projeto demonstra como uma aplicação front-end pode buscar informações externas e transformar respostas de uma API em conteúdo visual e interativo.</p>
+          </div>
+          <div class="about-cards">
+            <article class="about-card">
+              <span class="about-number">01</span>
+              <span class="about-symbol" aria-hidden="true">⌁</span>
+              <h3>API pública</h3>
+              <p>Os dados dos personagens são consultados na Rick and Morty API por requisições HTTP.</p>
+            </article>
+            <article class="about-card">
+              <span class="about-number">02</span>
+              <span class="about-symbol" aria-hidden="true">▦</span>
+              <h3>DOM dinâmico</h3>
+              <p>O JavaScript cria os elementos dos cards e os insere na página conforme a resposta recebida.</p>
+            </article>
+            <article class="about-card">
+              <span class="about-number">03</span>
+              <span class="about-symbol" aria-hidden="true">◎</span>
+              <h3>Front-end puro</h3>
+              <p>Interface desenvolvida com HTML, CSS e JavaScript, sem frameworks ou bibliotecas externas.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#inicio">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>PORTAL <span>C-137</span></strong><small>ARQUIVO INTERDIMENSIONAL</small></span>
+      </a>
+      <p>Projeto acadêmico de desenvolvimento front-end.</p>
+      <p class="footer-credit">Dados fornecidos por <a href="https://rickandmortyapi.com/" target="_blank" rel="noreferrer">The Rick and Morty API</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>
